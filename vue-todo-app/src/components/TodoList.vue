@@ -3,16 +3,7 @@
     <h1>Todo List:</h1>
     <input type="text" v-model="newTodo" @keyup.enter="addTodo" class="todo-input" placeholder="What needs to be done">
     <transition-group name="fade" enter-active-class="animated fadeInUp" leave-active-class="animated fadeOutDown">
-      <div v-for="(todo, index) in todosFiltered" :key="todo.id" class="todo-item">
-        <div class="todo-item-left">
-          <input type="checkbox" v-model="todo.completed">
-          <div v-if="!todo.editing" @dblclick="editTodo(todo)" class="todo-item-label" :class="{ completed: todo.completed }">{{ todo.title }}</div>
-          <input v-else class="todo-item-edit" type="text" v-focus v-model="todo.title" @blur="doneEdit(todo)" @keyup.esc="cancelEdit(todo)" @keyup.enter="doneEdit(todo)">
-        </div>
-        <div class="remove-item" @click="removeTodo(index)">
-          &times;
-        </div>
-      </div>
+      <TodoItem v-for="(todo, index) in todosFiltered" :key="todo.id" :todo="todo" :index="index" :checkAll="!anyRemaining" @removedTodo="removeTodo" @finishedEdit="finishedEdit"></TodoItem>
     </transition-group>
 
     <div class="extra-container">
@@ -40,8 +31,13 @@
 </template>
 
 <script>
+  import TodoItem from './TodoItem'
+
   export default {
     name: 'TodoList',
+    components: {
+      TodoItem
+    },
     data() {
       return {
         newTodo: '',
@@ -62,13 +58,6 @@
             editing: false
           }
         ]
-      }
-    },
-    directives: {
-      focus: {
-        inserted: function(el) {
-          el.focus();
-        }
       }
     },
     computed: {
@@ -108,32 +97,21 @@
       removeTodo(index) {
         this.todos.splice(index, 1);
       },
-      editTodo(todo) {
-        this.beforeEditCache = todo.title;
-        todo.editing = true;
-      },
-      doneEdit(todo) {
-        if (todo.title.trim() == '') {
-          todo.title = this.beforeEditCache;
-        }
-        todo.editing = false;
-      },
-      cancelEdit(todo) {
-        todo.title = this.beforeEditCache;
-        todo.editing = false;
-      },
       checkAllTodos() {
         this.todos.forEach((todo) => todo.completed = event.target.checked)
       },
       clearCompleted() {
         this.todos = this.todos.filter(todo => !todo.completed);
+      },
+      finishedEdit(data) {
+        this.todos.splice(data.index, 1, data.todo)
       }
     }
   }
 
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   @import url("https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css");
 
   .todo-input {
