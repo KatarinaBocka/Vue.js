@@ -105,6 +105,7 @@
         this.$store.state.todos = this.$store.state.todos.filter(todo => !todo.completed);
       },
       finishedEdit(data) {
+        const index = this.$store.state.todos.findIndex(item => item.id == data.id);
         this.$store.state.todos.splice(data.index, 1, data.todo)
       }
     }
