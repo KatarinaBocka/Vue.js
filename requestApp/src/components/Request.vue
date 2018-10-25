@@ -6,7 +6,7 @@
       <v-card dark color="lighten-3 grey" class="mb-5">
         <v-container fluid grid-list-sm>
           <v-layout>
-            <v-flex xs6 sm3 v-for="(imgLabelShape, index) in labelsShapes" :key="`imgLabelShape-${index = index + 2}`" >
+            <v-flex xs6 sm3 v-for="(imgLabelShape, index) in $store.state.labelsShapes" :key="`imgLabelShape-${index = index + 2}`" >
               <v-img  :src="imgLabelShape.url" ></v-img>
               <button flat class="mt-4 ml-0 select-btn " :class="{ 'active':imgLabelShape == request.selectedShape }" @click="getImgTitle, request.selectedShape = imgLabelShape" :data-title="imgLabelShape.title">{{imgLabelShape.title}}</button>
             </v-flex>
@@ -261,40 +261,40 @@ export default {
         }
       },
 
-      labelsShapes: [
-          {url: "https://cdn.vuetifyjs.com/images/parallax/material2.jpg", title: "Rectangle"}, 
-          {url: "https://cdn.vuetifyjs.com/images/parallax/material2.jpg", title: "Square"}, 
-          {url: "https://cdn.vuetifyjs.com/images/parallax/material2.jpg", title: "Oval"}, 
-          {url: "https://cdn.vuetifyjs.com/images/parallax/material2.jpg", title: "Circle"},
-        ],
-      dimensions: [
-        "1.5 X 3.0 (1-1/2 X 3) - Rounded Corners - Corner Radius 0.016",
-        "1.5 X 3.5 (1-1/2 X 3-1/2) - Rounded Corners - Corner Radius 0.063",
-        "1.75 X 3.5 (1-3/4 X 3-1/2) - Rounded Corners - Corner Radius 0.125",
-        "2.0 X 4.0 (2 X 4) - Rounded Corners - Corner Radius 0.125",
-        "2.0 X 5.0 (2 X 5) - Rounded Corners - Corner Radius 0.062",
-        "1.5 X 3.0 (1-1/2 X 3) - Rounded Corners - Corner Radius 0.0145",
-        "1.5 X 3.5 (1-1/2 X 3-1/2) - Rounded Corners - Corner Radius 0.06345",
-        "1.75 X 3.5 (1-3/4 X 3-1/2) - Rounded Corners - Corner Radius 0.12575",
-        "2.0 X 4.0 (2 X 4) - Rounded Corners - Corner Radius 0.12515",
-        "2.0 X 5.0 (2 X 5) - Rounded Corners - Corner Radius 0.062753",
-      ],
-      materials: [
-          {url: "https://cdn.vuetifyjs.com/images/parallax/material2.jpg", title: "CAST GLOSS"}, 
-          {url: "https://cdn.vuetifyjs.com/images/parallax/material2.jpg", title: "CHROME BOPP"}, 
-          {url: "https://cdn.vuetifyjs.com/images/parallax/material2.jpg", title: "CHROME BOPP (LIP BALM)"}, 
-          {url: "https://cdn.vuetifyjs.com/images/parallax/material2.jpg", title: "GOLD BOPP"},
-          {url: "https://cdn.vuetifyjs.com/images/parallax/material2.jpg", title: "WHITE BOPP"},
-          {url: "https://cdn.vuetifyjs.com/images/parallax/material2.jpg", title: "VELLUM- RECYCLED"}, 
-          {url: "https://cdn.vuetifyjs.com/images/parallax/material2.jpg", title: "SQUEEZABLE"}, 
-          {url: "https://cdn.vuetifyjs.com/images/parallax/material2.jpg", title: "WHITE VINYL"},
-      ],
-      laminates: [
-        {title: "HIGH GLOSS", description: "Our most popular, and least expensive laminate. Provides protection and shiny finish."},
-        {title: "MATTE", description: "Provides a dull, non-glossy finish. Achieves a more 'natural' look."},
-        {title: "THERMAL TRANSFER", description: "Gloss laminate that works with most thermal transfer printers."},
-        {title: "UV OUTDOOR GLOSS", description: "Best for labels that will be used outdoors. High gloss finish, with UV resistance."},
-      ]
+      // labelsShapes: [
+      //     {url: "https://cdn.vuetifyjs.com/images/parallax/material2.jpg", title: "Rectangle"}, 
+      //     {url: "https://cdn.vuetifyjs.com/images/parallax/material2.jpg", title: "Square"}, 
+      //     {url: "https://cdn.vuetifyjs.com/images/parallax/material2.jpg", title: "Oval"}, 
+      //     {url: "https://cdn.vuetifyjs.com/images/parallax/material2.jpg", title: "Circle"},
+      //   ],
+      // dimensions: [
+      //   "1.5 X 3.0 (1-1/2 X 3) - Rounded Corners - Corner Radius 0.016",
+      //   "1.5 X 3.5 (1-1/2 X 3-1/2) - Rounded Corners - Corner Radius 0.063",
+      //   "1.75 X 3.5 (1-3/4 X 3-1/2) - Rounded Corners - Corner Radius 0.125",
+      //   "2.0 X 4.0 (2 X 4) - Rounded Corners - Corner Radius 0.125",
+      //   "2.0 X 5.0 (2 X 5) - Rounded Corners - Corner Radius 0.062",
+      //   "1.5 X 3.0 (1-1/2 X 3) - Rounded Corners - Corner Radius 0.0145",
+      //   "1.5 X 3.5 (1-1/2 X 3-1/2) - Rounded Corners - Corner Radius 0.06345",
+      //   "1.75 X 3.5 (1-3/4 X 3-1/2) - Rounded Corners - Corner Radius 0.12575",
+      //   "2.0 X 4.0 (2 X 4) - Rounded Corners - Corner Radius 0.12515",
+      //   "2.0 X 5.0 (2 X 5) - Rounded Corners - Corner Radius 0.062753",
+      // ],
+      // materials: [
+      //     {url: "https://cdn.vuetifyjs.com/images/parallax/material2.jpg", title: "CAST GLOSS"}, 
+      //     {url: "https://cdn.vuetifyjs.com/images/parallax/material2.jpg", title: "CHROME BOPP"}, 
+      //     {url: "https://cdn.vuetifyjs.com/images/parallax/material2.jpg", title: "CHROME BOPP (LIP BALM)"}, 
+      //     {url: "https://cdn.vuetifyjs.com/images/parallax/material2.jpg", title: "GOLD BOPP"},
+      //     {url: "https://cdn.vuetifyjs.com/images/parallax/material2.jpg", title: "WHITE BOPP"},
+      //     {url: "https://cdn.vuetifyjs.com/images/parallax/material2.jpg", title: "VELLUM- RECYCLED"}, 
+      //     {url: "https://cdn.vuetifyjs.com/images/parallax/material2.jpg", title: "SQUEEZABLE"}, 
+      //     {url: "https://cdn.vuetifyjs.com/images/parallax/material2.jpg", title: "WHITE VINYL"},
+      // ],
+      // laminates: [
+      //   {title: "HIGH GLOSS", description: "Our most popular, and least expensive laminate. Provides protection and shiny finish."},
+      //   {title: "MATTE", description: "Provides a dull, non-glossy finish. Achieves a more 'natural' look."},
+      //   {title: "THERMAL TRANSFER", description: "Gloss laminate that works with most thermal transfer printers."},
+      //   {title: "UV OUTDOOR GLOSS", description: "Best for labels that will be used outdoors. High gloss finish, with UV resistance."},
+      // ]
     }
   },
   methods: {
@@ -303,6 +303,18 @@ export default {
     },
   },
   computed: {
+    // labelsShapes() {
+    //   return this.$store.getters.labelsShapes;
+    // },
+    // dimensions() {
+    //   return this.$store.getters.dimensions;
+    // },
+    // materials() {
+    //   return this.$store.getters.materials;
+    // },
+    // laminates() {
+    //   return this.$store.getters.laminates;
+    // },
     compClasses() {
       return {
         selectedShape: this.selectedShape,
